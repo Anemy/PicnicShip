@@ -91,8 +91,15 @@ function resetGame() {
 // returns a string which defines an HTML table based on the passed board
 function getBoardAsTable(board) {
 	var tableString = '';
+	// top row of numbers
+	tableString += '<tr><td> </td>';
 	for(var i = 0; i < boardSize; i++) {
-		tableString += '<tr>'
+		tableString += '<td>'+i+'</td>'
+	}
+	tableString += '</tr>';
+
+	for(var i = 0; i < boardSize; i++) {
+		tableString += '<tr><td>'+i+'</td>'
 		for(var k = 0; k < boardSize; k++) {
 			switch(board[i][k]) {
 				case EMPTY:
