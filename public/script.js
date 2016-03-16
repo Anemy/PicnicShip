@@ -19,6 +19,12 @@ var currentTurn = LEFT;
 
 // dictates how fast the game moves
 var gameSpeed = defaultGameSpeed;
+var timeBetweenGames = defaultTimeBetweenGames;
+
+if(optomizedGame) {
+	gameSpeed = 0;
+	timeBetweenGames = 0;
+}
 
 var gameOver = false;
 var turnsInCurrentGame = 0;
@@ -159,12 +165,20 @@ function checkGameOver() {
 	}
 
 	if(gameOver) {
-		setTimeout(function() {
-			$('.status').text('Starting a new game...');
+		if(optomizedGame) {
+			updatePage();
 			turnsinGameTotal.push(turnsInCurrentGame);
 			$('.moves').append('<div class="move">' + turnsInCurrentGame + '</div>')
 			resetGame();
-		}, timeBetweenGames);
+		}
+		else {
+			setTimeout(function() {
+				$('.status').text('Starting a new game...');
+				turnsinGameTotal.push(turnsInCurrentGame);
+				$('.moves').append('<div class="move">' + turnsInCurrentGame + '</div>')
+				resetGame();
+			}, timeBetweenGames);
+		}
 	}
 }
 
@@ -190,7 +204,9 @@ function gameLoop() {
 		checkGameOver();
 	}
 
-	updatePage();
+	if(!optomizedGame){
+		updatePage();
+	}
 }
 
 // calls to reset the game and start the game loop
@@ -198,9 +214,14 @@ function startGame() {
 	console.log('Starting game...')
 
 	resetGame();
-
+	console.log('Running game loop.');
 	gameLoopInterval = setInterval(gameLoop, gameSpeed);
+
+	if(optomizedGame) {
+		updatePage();
+	}
 }
 
-startGame();
+startGame()
+
 console.log('Game script loaded. ');

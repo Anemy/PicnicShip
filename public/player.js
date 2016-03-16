@@ -20,16 +20,18 @@ var Player = function(name) {
 
     var action = this.brain.forward(getBoardAsOneArray(enemyBoard));
     // action is a position on the board
-    // console.log('Using board: ' + getBoardAsOneArray(enemyBoard));
-    // console.log('Attempt action: ' + action + ' x:' + (action%10) + " y:" + Math.floor(action/10));
-
-    // random move
-    // var randomTry = findRandomOpenSpaceOnBoard(enemyBoard);
-
+    
     var move = {
       x: (action%10),
       y: Math.floor(action/10)
     }
+
+    // random move
+    // var randomTry = findRandomOpenSpaceOnBoard(enemyBoard);
+    // var move = {
+    //   x: randomTry.x,
+    //   y: randomTry.y
+    // }
 
     var moveReward = performMoveOnBoard(this, enemyBoard, move);
     // console.log('Move reward: ' + moveReward);

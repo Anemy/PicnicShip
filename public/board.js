@@ -45,17 +45,23 @@ returns a reward based on what the attempted move results in
 */
 function performMoveOnBoard (player, board, move) {
   if(board[move.x][move.y] == EMPTY) {
-    $('.status').text(player.name + ' miss :\'(');
+    if(!optomizedGame) {
+      $('.status').text(player.name + ' miss :\'(');
+    }
     board[move.x][move.y] = MISS;
     return MISS_REWARD;
   }
   else if(board[move.x][move.y] > EMPTY) { // ship
-    $('.status').text(player.name + ' hit on enemy ' + ships[board[move.x][move.y]].name + '!!');
+    if(!optomizedGame) {
+      $('.status').text(player.name + ' hit on enemy ' + ships[board[move.x][move.y]].name + '!!');
+    }
     board[move.x][move.y] = HIT;
     return HIT_REWARD;
   }
   else {
-    $('.status').text(player.name + ' wasted move');
+    if(!optomizedGame) {
+      $('.status').text(player.name + ' wasted move');
+    }
     return BADMOVE_REWARD;
   }
 }

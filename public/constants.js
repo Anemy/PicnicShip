@@ -30,7 +30,7 @@ const HIT = -3;
 // a move per half second
 const defaultGameSpeed = 0;
 
-const timeBetweenGames = 20;
+const defaultTimeBetweenGames = 20;
 
 const AI_INPUTS = 100;
 const AI_ACTIONS = 100;

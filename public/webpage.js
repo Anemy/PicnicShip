@@ -9,7 +9,13 @@ clicks etc
 
 var paused = false;
 
+var optomizedGame = false;
+
 $(document).ready(function() {
+  if(optomizedGame) {
+    $('.optomizeButton').addClass('onOptomize');
+  }
+
   $('.pauseplay').click(function() {
     paused = !paused;
     if(paused) {
@@ -18,5 +24,16 @@ $(document).ready(function() {
     else {
       $('.pauseplay').text('Pause');
     }
+  });
+
+  $('.optomizeButton').click(function () {
+    if(optomizedGame) {
+      $('.optomizeButton').removeClass('onOptomized');
+    }
+    else {
+      $('.optomizeButton').addClass('onOptomized');
+    }
+
+    optomizedGame = !optomizedGame;
   });
 });
