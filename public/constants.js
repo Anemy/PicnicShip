@@ -25,4 +25,7 @@ const boardSize = 10;
 // To differentiate locations on the map
 const EMPTY = -1;
 
+// a move per half second
+const defaultGameSpeed = 500;
+
 console.log('Constants loaded.')
