@@ -174,3 +174,21 @@ html, body {
 .onOptomized {
   background-color: #2ecc71;
 }
+
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: #2ecc71;
+  stroke-width: 1.5px;
+}

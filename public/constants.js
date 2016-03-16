@@ -39,7 +39,7 @@ const AI_ACTIONS = 100;
 Reward constants
 Help to train the AI
 */
-const HIT_REWARD = 10;
+const HIT_REWARD = 100;
 const MISS_REWARD = 0;
 const BADMOVE_REWARD = -10;
 

@@ -20,7 +20,7 @@ var Player = function(name) {
 
     var action = this.brain.forward(getBoardAsOneArray(enemyBoard));
     // action is a position on the board
-    
+
     var move = {
       x: (action%10),
       y: Math.floor(action/10)
@@ -35,6 +35,18 @@ var Player = function(name) {
 
     var moveReward = performMoveOnBoard(this, enemyBoard, move);
     // console.log('Move reward: ' + moveReward);
+
+    lastHundredRewards.push(moveReward);
+    if(lastHundredRewards.length > 100) {
+      var sum = 0;
+      for(var i = 0; i < lastHundredRewards.length; i++) {
+        sum += lastHundredRewards[i];
+      }
+      totalAverageRewards.push(sum/lastHundredRewards.length)
+      lastHundredRewards = [];
+
+      updateRewardsVis();
+    }
 
     // This trains the brain
     this.brain.backward(moveReward);

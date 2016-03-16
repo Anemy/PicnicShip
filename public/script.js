@@ -30,6 +30,9 @@ var gameOver = false;
 var turnsInCurrentGame = 0;
 var turnsinGameTotal = [];
 
+var totalAverageRewards = [];
+var lastHundredRewards = [];
+
 // places the ships randomly around the board (where they fit)
 function placeShips(board) {
 	for(var i = 0; i < ships.length; i++) {
@@ -168,17 +171,24 @@ function checkGameOver() {
 		if(optomizedGame) {
 			updatePage();
 			turnsinGameTotal.push(turnsInCurrentGame);
-			$('.moves').append('<div class="move">' + turnsInCurrentGame + '</div>')
+			// $('.moves').append('<div class="move">' + turnsInCurrentGame + '</div>')
 			resetGame();
+			if(turnsinGameTotal.length > 1) {
+				updateMovesPerGameVis();
+			}
 		}
 		else {
 			setTimeout(function() {
 				$('.status').text('Starting a new game...');
 				turnsinGameTotal.push(turnsInCurrentGame);
-				$('.moves').append('<div class="move">' + turnsInCurrentGame + '</div>')
+				// $('.moves').append('<div class="move">' + turnsInCurrentGame + '</div>')
 				resetGame();
+				if(turnsinGameTotal.length > 1) {
+					updateMovesPerGameVis();
+				}
 			}, timeBetweenGames);
 		}
+		
 	}
 }
 
