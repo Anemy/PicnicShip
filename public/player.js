@@ -18,20 +18,28 @@ var Player = function(name) {
 
   this.makeMove = function(enemyBoard) {
 
-    // TODO add logic to moves
-    var randomTry = findRandomOpenSpaceOnBoard(enemyBoard);
+    var action = this.brain.forward(getBoardAsOneArray(enemyBoard));
+    // action is a position on the board
+    // console.log('Attempt action: ' + action + ' x:' + (action%10) + " y:" + Math.floor(action/10));
+
+    // random move
+    // var randomTry = findRandomOpenSpaceOnBoard(enemyBoard);
 
     var move = {
-      x: randomTry.x,
-      y: randomTry.y
+      x: (action%10),
+      y: Math.floor(action/10)
     }
 
-    var moveOutcome = performMoveOnBoard(this, enemyBoard, move);
+    var moveReward = performMoveOnBoard(this, enemyBoard, move);
+
+    // This trains the brain
+    this.brain.backward(moveReward);
+
 
     // pushes the move and the outcome into the pastBoards
     this.pastBoards.push({
       board: enemyBoard,
-      outcome: moveOutcome,
+      reward: moveReward,
       moveX: move.x,
       moveY: move.y
     });

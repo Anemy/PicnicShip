@@ -19,16 +19,43 @@ function boardHasNoShips (board) {
   return true;
 }
 
+function getBoardAsOneArray(board) {
+  var newBoard = [];
+
+  for(var i = 0; i < boardSize; i++) {
+    for(var k = 0; k < boardSize; k++) {
+      newBoard.push(board[i][k]);
+    }
+  }
+
+  return newBoard;
+}
+
+function isAllowedMove(board, x, y) {
+  if(board[x][y] == MISS || board[x][y] == HIT) {
+    return false;
+  }
+  return true;
+}
+
+/*
+
+returns a reward based on what the attempted move results in
+
+*/
 function performMoveOnBoard (player, board, move) {
   if(board[move.x][move.y] == EMPTY) {
     $('.status').text(player.name + ' miss :\'(');
     board[move.x][move.y] = MISS;
-    return MISS;
+    return MISS_REWARD;
   }
-  else {
+  else if(board[move.x][move.y] > EMPTY) { // ship
     $('.status').text(player.name + ' hit on enemy ' + ships[board[move.x][move.y]].name + '!!');
     board[move.x][move.y] = HIT;
-    return HIT;
+    return HIT_REWARD;
+  }
+  else {
+    return BADMOVE_REWARD;
   }
 }
 
