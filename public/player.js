@@ -11,7 +11,13 @@ var Player = function(name) {
 
   // inputs and actions in constants.js
   // deepqlearn from https://github.com/karpathy/convnetjs
-  this.brain = new deepqlearn.Brain(AI_INPUTS, AI_ACTIONS);
+  this.brain = new deepqlearn.Brain(AI_INPUTS, AI_ACTIONS,
+  {
+    gamma: 0.01,
+    experience_size: 10,
+    // learning_steps_total: 10000,
+    // learning_steps_burnin: 100
+  });
 
   // accumulates the moves, their results, and the corresponding board state
   // this.pastBoards = [];
@@ -22,8 +28,8 @@ var Player = function(name) {
     // action is a position on the board
 
     var move = {
-      x: (action%10),
-      y: Math.floor(action/10)
+      x: (action%boardSize),
+      y: Math.floor(action/boardSize)
     }
 
     // random move
