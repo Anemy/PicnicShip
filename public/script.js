@@ -8,8 +8,8 @@
 var leftBoard = [];
 var rightBoard = [];
 
-var leftPlayer = new Player('Jimmy');
-var rightPlayer = new Player('Timmy');
+var leftPlayer = new Player('Left');
+var rightPlayer = new Player('Right');
 
 // holds the set interval of the game loop
 var gameLoopInterval;

@@ -28,7 +28,7 @@ const MISS = -2;
 const HIT = -3;
 
 // a move per half second
-const defaultGameSpeed = 500;
+const defaultGameSpeed = 100;
 
 const timeBetweenGames = 1000;
 
