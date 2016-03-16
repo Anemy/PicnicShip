@@ -13,10 +13,11 @@ var Player = function(name) {
   // deepqlearn from https://github.com/karpathy/convnetjs
   this.brain = new deepqlearn.Brain(AI_INPUTS, AI_ACTIONS,
   {
-    gamma: 0.01,
-    experience_size: 10,
-    // learning_steps_total: 10000,
-    // learning_steps_burnin: 100
+    gamma: 0,
+    experience_size: 1000,
+    learning_steps_total: 100,
+    learning_steps_burnin: 100,
+    // epsilon_min: 0
   });
 
   // accumulates the moves, their results, and the corresponding board state
