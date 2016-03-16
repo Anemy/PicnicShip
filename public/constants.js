@@ -32,4 +32,7 @@ const defaultGameSpeed = 30;
 
 const timeBetweenGames = 2000;
 
+const AI_INPUTS = 100;
+const AI_ACTIONS = 100;
+
 console.log('Constants loaded.')

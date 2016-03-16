@@ -9,6 +9,10 @@ And learning
 var Player = function(name) {
   this.name = name;
 
+  // inputs and actions in constants.js
+  // deepqlearn from https://github.com/karpathy/convnetjs
+  this.brain = new deepqlearn.Brain(AI_INPUTS, AI_ACTIONS);
+
   // accumulates the moves, their results, and the corresponding board state
   this.pastBoards = [];
 
