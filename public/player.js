@@ -14,7 +14,7 @@ var Player = function(name) {
   this.brain = new deepqlearn.Brain(AI_INPUTS, AI_ACTIONS);
 
   // accumulates the moves, their results, and the corresponding board state
-  this.pastBoards = [];
+  // this.pastBoards = [];
 
   this.makeMove = function(enemyBoard) {
 
@@ -52,12 +52,12 @@ var Player = function(name) {
     this.brain.backward(moveReward);
 
     // pushes the move and the outcome into the pastBoards
-    this.pastBoards.push({
-      board: enemyBoard,
-      reward: moveReward,
-      moveX: move.x,
-      moveY: move.y
-    });
+    // this.pastBoards.push({
+    //   board: enemyBoard,
+    //   reward: moveReward,
+    //   moveX: move.x,
+    //   moveY: move.y
+    // });
   }
 }
 
