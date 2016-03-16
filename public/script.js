@@ -138,29 +138,61 @@ function turn(board) {
 
 		if(board[xTry][yTry] != MISS && board[xTry][yTry] != HIT) {
 			if(board[xTry][yTry] == EMPTY) {
+				$('.status').text('Miss :\'(');
 				board[xTry][yTry] = MISS;
+				return MISS;
 			}
 			else {
+				$('.status').text('Hit on enemy ' + ships[board[xTry][yTry]].name + '!!');
 				board[xTry][yTry] = HIT;
+				return HIT;
 			}
-			break;
 		}
 	}
 }
 
-function checkGameOver() {
+// returns whether or not the passed board has any ships left
+function boardHasNoShips (board) {
+	for(var i = 0; i < boardSize; i++) {
+		for(var k = 0; k < boardSize; k++) {
+			if(board[i][k] > EMPTY) {
+				return false;
+			}
+		}
+	}
 
+	return true;
 }
 
-function gameLoop() {
+function checkGameOver() {
+	if(boardHasNoShips(leftBoard)) {
+		console.log('Left is the winner!!');
+		$('.status').text('Right is the winner!!!');
+		clearInterval(gameLoopInterval);
+	}
+	else if(boardHasNoShips(rightBoard)) {
+		console.log('Left is the winner!!');
+		$('.status').text('Left is the winner!!');
+		clearInterval(gameLoopInterval);
+	}
+}
+
+function performMove() {
 	// do a move depending on whose turn it is
 	if(currentTurn == LEFT) {
-		turn(rightBoard);
+		var turnResult = turn(rightBoard);
 		currentTurn = RIGHT;
 	}
 	else if(currentTurn == RIGHT) {
-		turn(leftBoard);
+		var turnResult = turn(leftBoard);
 		currentTurn = LEFT;
+	}
+}
+
+function gameLoop() {
+	// paused from webpage.js
+	if(!paused) {
+		performMove();
 	}
 
 	checkGameOver();

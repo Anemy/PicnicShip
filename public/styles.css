@@ -48,20 +48,22 @@ html, body {
   text-align: center;
 
   background-color: #FAFAFA;
+
+  font-family: Arial;
 }
 
 .title {
-  margin-top: 1em;
-  margin-bottom: 1em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 
-  font-family: Arial;
-  font-size: 1.5em;
+  font-size: 2em;
 }
 
 .board {
   width: 40%;
   /* Height is runtime */
-  margin: 4%;
+  margin-left: 2%;
+  margin-right: 2%;
 
   padding-bottom: 20%;
 
@@ -93,5 +95,35 @@ html, body {
 }
 
 .status {
-  font-family: Arial;
+  margin-top: 1em;
+
+  font-size: 1.6em;
+}
+
+.pauseplay {
+  border-radius: 3px;
+
+  text-align: center;
+  margin: auto;
+
+  transition: all 0.3s;
+
+  width: 6em;
+  height: auto;
+  padding: 5px;
+  font-size: 1.4em;
+  vertical-align: center;
+
+  border: 1px solid rgb(44, 62, 80);
+}
+
+.pauseplay:hover {
+  color: white;
+  background-color: rgb(44, 62, 80);
+
+  cursor: pointer;
+}
+
+.pauseplay:active {
+  box-shadow: 0 0 8px rgba(44, 62, 80, 0.5);
 }
