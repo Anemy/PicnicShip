@@ -162,6 +162,7 @@ function checkGameOver() {
 		setTimeout(function() {
 			$('.status').text('Starting a new game...');
 			turnsinGameTotal.push(turnsInCurrentGame);
+			$('.moves').append('<div class="move">' + turnsInCurrentGame + '</div>')
 			resetGame();
 		}, timeBetweenGames);
 	}

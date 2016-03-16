@@ -20,6 +20,7 @@ var Player = function(name) {
 
     var action = this.brain.forward(getBoardAsOneArray(enemyBoard));
     // action is a position on the board
+    // console.log('Using board: ' + getBoardAsOneArray(enemyBoard));
     // console.log('Attempt action: ' + action + ' x:' + (action%10) + " y:" + Math.floor(action/10));
 
     // random move
@@ -31,10 +32,10 @@ var Player = function(name) {
     }
 
     var moveReward = performMoveOnBoard(this, enemyBoard, move);
+    // console.log('Move reward: ' + moveReward);
 
     // This trains the brain
     this.brain.backward(moveReward);
-
 
     // pushes the move and the outcome into the pastBoards
     this.pastBoards.push({

@@ -28,9 +28,9 @@ const MISS = -2;
 const HIT = -3;
 
 // a move per half second
-const defaultGameSpeed = 500;
+const defaultGameSpeed = 0;
 
-const timeBetweenGames = 2000;
+const timeBetweenGames = 20;
 
 const AI_INPUTS = 100;
 const AI_ACTIONS = 100;
@@ -40,7 +40,7 @@ Reward constants
 Help to train the AI
 */
 const HIT_REWARD = 10;
-const MISS_REWARD = -10;
-const BADMOVE_REWARD = -100;
+const MISS_REWARD = 0;
+const BADMOVE_REWARD = -10;
 
 console.log('Constants loaded.')

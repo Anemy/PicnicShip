@@ -55,6 +55,7 @@ function performMoveOnBoard (player, board, move) {
     return HIT_REWARD;
   }
   else {
+    $('.status').text(player.name + ' wasted move');
     return BADMOVE_REWARD;
   }
 }
