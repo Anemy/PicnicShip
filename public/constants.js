@@ -30,4 +30,6 @@ const HIT = -3;
 // a move per half second
 const defaultGameSpeed = 500;
 
+const timeBetweenGames = 1000;
+
 console.log('Constants loaded.')

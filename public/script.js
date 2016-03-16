@@ -8,6 +8,9 @@
 var leftBoard = [];
 var rightBoard = [];
 
+var leftPlayer = new Player('Jimmy');
+var rightPlayer = new Player('Timmy');
+
 // holds the set interval of the game loop
 var gameLoopInterval;
 
@@ -16,6 +19,8 @@ var currentTurn = LEFT;
 
 // dictates how fast the game moves
 var gameSpeed = defaultGameSpeed;
+
+var gameOver = false;
 
 // places the ships randomly around the board (where they fit)
 function placeShips(board) {
@@ -70,6 +75,8 @@ function placeShips(board) {
 
 // resets the state of the game to blank (no ships)
 function resetGame() {
+	gameOver = false;
+
 	leftBoard = [];
 	rightBoard = [];
 
@@ -136,73 +143,46 @@ function updatePage() {
 	$('.board').css({'height':cw+'px'});
 }
 
-// will perform a turn on the board passed
-function turn(board) {
-	// right now will just perform a random move on a place which isn't alright burnt
-	while(true) {
-		var xTry = Math.floor(Math.random()*boardSize);
-		var yTry = Math.floor(Math.random()*boardSize);
-
-		if(board[xTry][yTry] != MISS && board[xTry][yTry] != HIT) {
-			if(board[xTry][yTry] == EMPTY) {
-				$('.status').text('Miss :\'(');
-				board[xTry][yTry] = MISS;
-				return MISS;
-			}
-			else {
-				$('.status').text('Hit on enemy ' + ships[board[xTry][yTry]].name + '!!');
-				board[xTry][yTry] = HIT;
-				return HIT;
-			}
-		}
-	}
-}
-
-// returns whether or not the passed board has any ships left
-function boardHasNoShips (board) {
-	for(var i = 0; i < boardSize; i++) {
-		for(var k = 0; k < boardSize; k++) {
-			if(board[i][k] > EMPTY) {
-				return false;
-			}
-		}
-	}
-
-	return true;
-}
-
 function checkGameOver() {
 	if(boardHasNoShips(leftBoard)) {
-		console.log('Left is the winner!!');
-		$('.status').text('Right is the winner!!!');
-		clearInterval(gameLoopInterval);
+		$('.status').text(leftPlayer.name + ' is the winner!!!');
+
+		gameOver = true;
 	}
 	else if(boardHasNoShips(rightBoard)) {
-		console.log('Left is the winner!!');
-		$('.status').text('Left is the winner!!');
-		clearInterval(gameLoopInterval);
+		$('.status').text(rightPlayer.name + ' is the winner!!');
+
+		gameOver = true;
+	}
+
+	if(gameOver) {
+		setTimeout(function() {
+			$('.status').text('Starting a new game...');
+
+			resetGame();
+		}, timeBetweenGames);
 	}
 }
 
-function performMove() {
+function performTurn() {
 	// do a move depending on whose turn it is
 	if(currentTurn == LEFT) {
-		var turnResult = turn(rightBoard);
+		leftPlayer.makeMove(rightBoard);
 		currentTurn = RIGHT;
 	}
 	else if(currentTurn == RIGHT) {
-		var turnResult = turn(leftBoard);
+		rightPlayer.makeMove(leftBoard);
 		currentTurn = LEFT;
 	}
 }
 
 function gameLoop() {
 	// paused from webpage.js
-	if(!paused) {
-		performMove();
-	}
+	if(!paused && !gameOver) {
+		performTurn();
 
-	checkGameOver();
+		checkGameOver();
+	}
 
 	updatePage();
 }
