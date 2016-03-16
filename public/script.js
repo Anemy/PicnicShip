@@ -88,8 +88,37 @@ function resetGame() {
 	placeShips(rightBoard);
 }
 
-function updatePage() {
+// returns a string which defines an HTML table based on the passed board
+function getBoardAsTable(board) {
+	var tableString = '';
+	for(var i = 0; i < boardSize; i++) {
+		tableString += '<tr>'
+		for(var k = 0; k < boardSize; k++) {
+			tableString += '<td>'
+			switch(board[i][k]) {
+				case EMPTY:
+					tableString += 'E';
+					break;
+				default:
+					tableString += 'S';
+					break;
+			}
+			tableString += '</td>'
+		}
+		tableString += '</tr>';
+	}
 
+	return tableString;
+}
+
+/*
+Currently the game will draw as a table in html so editing the styling is easy (as oposed to html canvas)
+This functions builds the html table and adds it to the page
+*/
+function updatePage() {
+	// reset the drawing of the current tables
+	$('#leftBoard').html(getBoardAsTable(leftBoard));
+	$('#rightBoard').html(getBoardAsTable(rightBoard));
 }
 
 function gameLoop() {
