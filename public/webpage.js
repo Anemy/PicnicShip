@@ -20,5 +20,3 @@ $(document).ready(function() {
     }
   });
 });
-
-console.log('webpage.js loaded.');

@@ -21,6 +21,8 @@ var currentTurn = LEFT;
 var gameSpeed = defaultGameSpeed;
 
 var gameOver = false;
+var turnsInCurrentGame = 0;
+var turnsinGameTotal = [];
 
 // places the ships randomly around the board (where they fit)
 function placeShips(board) {
@@ -66,7 +68,7 @@ function placeShips(board) {
 					}
 				}
 
-				console.log('Placed ' + ships[i].name + ' at ' + xTry + ', ' + yTry);
+				// console.log('Placed ' + ships[i].name + ' at ' + xTry + ', ' + yTry);
 				break; // stop the while loop
 			}
 		}
@@ -76,6 +78,7 @@ function placeShips(board) {
 // resets the state of the game to blank (no ships)
 function resetGame() {
 	gameOver = false;
+	turnsInCurrentGame = 0;
 
 	leftBoard = [];
 	rightBoard = [];
@@ -145,12 +148,12 @@ function updatePage() {
 
 function checkGameOver() {
 	if(boardHasNoShips(leftBoard)) {
-		$('.status').text(leftPlayer.name + ' is the winner!!!');
+		$('.status').text(rightPlayer.name + ' is the winner!!!\nTurns in game: ' + turnsInCurrentGame);
 
 		gameOver = true;
 	}
 	else if(boardHasNoShips(rightBoard)) {
-		$('.status').text(rightPlayer.name + ' is the winner!!');
+		$('.status').text(leftPlayer.name + ' is the winner!!\nTurns in game: ' + turnsInCurrentGame);
 
 		gameOver = true;
 	}
@@ -158,13 +161,15 @@ function checkGameOver() {
 	if(gameOver) {
 		setTimeout(function() {
 			$('.status').text('Starting a new game...');
-
+			turnsinGameTotal.push(turnsInCurrentGame);
 			resetGame();
 		}, timeBetweenGames);
 	}
 }
 
 function performTurn() {
+	turnsInCurrentGame++;
+
 	// do a move depending on whose turn it is
 	if(currentTurn == LEFT) {
 		leftPlayer.makeMove(rightBoard);
