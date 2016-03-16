@@ -1,0 +1,44 @@
+html, body {
+	height: 100%;
+
+  text-align: center;
+}
+
+
+#input {
+  outline: none;
+  border: none;
+
+  font-family: "Verdana", Sans-serif;
+
+  font-size: 1em;
+
+  padding: 4px 4px;
+
+  border-radius: 2px;
+  border: 1px solid gray;
+
+  transition: all 0.4s;
+
+  width: 40%;
+}
+
+#input:focus {
+  box-shadow: 0 0 15px rgba(200, 50, 200, 0.5);
+}
+
+.results {
+  width: 40%;
+
+  margin: auto;
+  padding: 0;
+}
+
+.results li {
+  outline: none;
+
+  border: 1px solid gray;
+  list-style-type: none;
+
+  /*float: left;*/
+}
