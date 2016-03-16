@@ -94,16 +94,20 @@ function getBoardAsTable(board) {
 	for(var i = 0; i < boardSize; i++) {
 		tableString += '<tr>'
 		for(var k = 0; k < boardSize; k++) {
-			tableString += '<td>'
 			switch(board[i][k]) {
 				case EMPTY:
-					tableString += 'E';
+					tableString += '<td class="empty"></td>';
+					break;
+				case HIT:
+					tableString += '<td class="hit"></td>';
+					break;
+				case MISS:
+					tableString += '<td class="miss"></td>';
 					break;
 				default:
-					tableString += 'S';
+					tableString += '<td class="ship"></td>';
 					break;
 			}
-			tableString += '</td>'
 		}
 		tableString += '</tr>';
 	}
@@ -119,10 +123,47 @@ function updatePage() {
 	// reset the drawing of the current tables
 	$('#leftBoard').html(getBoardAsTable(leftBoard));
 	$('#rightBoard').html(getBoardAsTable(rightBoard));
+
+	// makes the boards display as squares
+	var cw = $('.board').width();
+	$('.board').css({'height':cw+'px'});
+}
+
+// will perform a turn on the board passed
+function turn(board) {
+	// right now will just perform a random move on a place which isn't alright burnt
+	while(true) {
+		var xTry = Math.floor(Math.random()*boardSize);
+		var yTry = Math.floor(Math.random()*boardSize);
+
+		if(board[xTry][yTry] != MISS && board[xTry][yTry] != HIT) {
+			if(board[xTry][yTry] == EMPTY) {
+				board[xTry][yTry] = MISS;
+			}
+			else {
+				board[xTry][yTry] = HIT;
+			}
+			break;
+		}
+	}
+}
+
+function checkGameOver() {
+
 }
 
 function gameLoop() {
+	// do a move depending on whose turn it is
+	if(currentTurn == LEFT) {
+		turn(rightBoard);
+		currentTurn = RIGHT;
+	}
+	else if(currentTurn == RIGHT) {
+		turn(leftBoard);
+		currentTurn = LEFT;
+	}
 
+	checkGameOver();
 
 	updatePage();
 }
@@ -136,5 +177,5 @@ function startGame() {
 	gameLoopInterval = setInterval(gameLoop, gameSpeed);
 }
 
-console.log('Script loaded. ');
 startGame();
+console.log('Game script loaded. ');

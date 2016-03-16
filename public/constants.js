@@ -24,6 +24,8 @@ const boardSize = 10;
 
 // To differentiate locations on the map
 const EMPTY = -1;
+const MISS = -2;
+const HIT = -3;
 
 // a move per half second
 const defaultGameSpeed = 500;

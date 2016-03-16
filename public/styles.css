@@ -1,3 +1,97 @@
+/* START reset css */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+/* END reset css */
+
+
 html, body {
   text-align: center;
+
+  background-color: #FAFAFA;
+}
+
+.title {
+  margin-top: 1em;
+  margin-bottom: 1em;
+
+  font-family: Arial;
+  font-size: 1.5em;
+}
+
+.board {
+  width: 40%;
+  /* Height is runtime */
+  margin: 4%;
+
+  padding-bottom: 20%;
+
+  display:inline-block;
+
+  border: 1px solid black;
+
+  table-layout: fixed;
+}
+
+.board td {
+  border: 1px solid black;
+}
+
+.board .empty {
+  background-color: #3498db;
+}
+
+.board .ship {
+  background-color: #2ecc71;
+}
+
+.board .miss {
+  background-color: #34495e;
+}
+
+.board .hit {
+  background-color: #e74c3c;
+}
+
+.status {
+  font-family: Arial;
 }
